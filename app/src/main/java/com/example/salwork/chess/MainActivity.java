@@ -31,6 +31,8 @@ public class MainActivity extends Activity implements Observer, View.OnClickList
 
         updateBoard();
 
+        model.test();
+
     }
 
     public void updateBoard(){

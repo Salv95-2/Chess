@@ -5,4 +5,8 @@ package com.example.salwork.chess;
  */
 
 public class RookBehavior implements Movement{
+    @Override
+    public Positions getPossiblePositions(char first_piece, int first_piece_row, int first_piece_col) {
+        return null;
+    }
 }
