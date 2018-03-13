@@ -20,27 +20,27 @@ public class Bot implements Player{
 
     public void findPotentialPositions() {
 
-        //create am object for each piece and get potential locations of all pieces
+        ArrayList<Positions> positions = new ArrayList<Positions>();
+        Positions possibleMoves;
 
         piece = new Pawn(new BlackPawnBehavior(grid));
 
-        Positions possibleMoves = piece.getPossibilities('p',3,4);
+        possibleMoves = piece.getPossibilities('p',1,0);
 
-        for(int i = 0; i < possibleMoves.getRows().size(); i++){
+        positions.add(possibleMoves);
 
-            Log.d("Black pawn poss row", String.valueOf(possibleMoves.getRows().get(i)));
-            Log.d("Black pawn poss col", String.valueOf(possibleMoves.getColumns().get(i)));
-        }
+        ////////
 
-        piece = new Pawn(new WhitePawnBehavior(grid));
+        piece = new Bishop(new BishopBehavior(grid));
 
-        possibleMoves = piece.getPossibilities('P',6,0);
+        possibleMoves = piece.getPossibilities('b',4,4);
 
-        for(int i = 0; i < possibleMoves.getRows().size(); i++){
+        positions.add(possibleMoves);
 
-            Log.d("White pawn poss row", String.valueOf(possibleMoves.getRows().get(i)));
-            Log.d("White pawn poss col", String.valueOf(possibleMoves.getColumns().get(i)));
-        }
+        ///////
+
+
+        
 
     }
 

@@ -123,9 +123,6 @@ public class BlackPawnBehavior implements Movement {
         ArrayList<Integer> cols = new ArrayList<Integer>();
         ArrayList<Integer> rows = new ArrayList<Integer>();
 
-        ArrayList<Character> white_pieces = new ArrayList<Character>();
-
-
 
         for(int i = 0; i < 8; i++){
 
@@ -141,7 +138,7 @@ public class BlackPawnBehavior implements Movement {
             }
         }
 
-        return  new Positions(rows, cols);
+        return  new Positions(first_piece, first_piece_row, first_piece_col, rows, cols);
 
     }
 

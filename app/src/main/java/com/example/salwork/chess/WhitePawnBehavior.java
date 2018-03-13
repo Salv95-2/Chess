@@ -142,8 +142,7 @@ public class WhitePawnBehavior implements Movement {
             }
         }
 
-        return new Positions(rows, cols);
-
+        return  new Positions(first_piece, first_piece_row, first_piece_col, rows, cols);
     }
 
 
