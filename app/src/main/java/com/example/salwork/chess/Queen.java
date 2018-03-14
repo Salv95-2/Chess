@@ -5,4 +5,13 @@ package com.example.salwork.chess;
  */
 
 public class Queen extends Piece{
+
+    Queen(Movement movement){
+        super.movement = movement;
+    }
+
+    public void setMovement(Movement movement){
+        super.movement = movement;
+    }
+
 }

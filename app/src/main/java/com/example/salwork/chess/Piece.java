@@ -16,5 +16,9 @@ public class Piece {
         return movement.getPossiblePositions(first_piece, first_piece_row, first_piece_col);
     }
 
+    public Movement getMovement(){
+        return movement;
+    }
+
 }
 
