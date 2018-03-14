@@ -39,8 +39,19 @@ public class Bot implements Player{
 
         ///////
 
+        piece = new Rook(new RookBehavior(grid));
 
-        
+        possibleMoves = piece.getPossibilities('r',4,4);
+
+        positions.add(possibleMoves);
+
+        //////
+
+        piece = new Knight(new KnightBehavior(grid));
+
+        possibleMoves = piece.getPossibilities('H',4,4);
+
+        positions.add(possibleMoves);
 
     }
 

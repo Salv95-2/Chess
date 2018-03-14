@@ -17,7 +17,7 @@ public class BishopBehavior implements Movement{
         this.grid = grid;
     }
 
-    public boolean checkBishopTeam(char first_piece, char second_piece){
+    public boolean checkTeam(char first_piece, char second_piece){
 
         if(Character.isUpperCase(first_piece)) {
             if (second_piece == 'R') {
@@ -56,7 +56,7 @@ public class BishopBehavior implements Movement{
     public boolean checkIfValidMove(char first_piece, int first_piece_row, int first_piece_col, char second_piece, int second_piece_row, int second_piece_col){
 
 
-        if(!checkBishopTeam(first_piece,second_piece)){
+        if(!checkTeam(first_piece,second_piece)){
             return false;
         }
 

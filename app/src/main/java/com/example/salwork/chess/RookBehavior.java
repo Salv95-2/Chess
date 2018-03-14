@@ -16,7 +16,7 @@ public class RookBehavior implements Movement{
     }
 
 
-    public boolean checkBishopTeam(char first_piece, char second_piece){
+    public boolean checkTeam(char first_piece, char second_piece){
 
         if(Character.isUpperCase(first_piece)) {
             if (second_piece == 'R') {
@@ -64,7 +64,7 @@ public class RookBehavior implements Movement{
             return false;
         }
 
-        if(!checkBishopTeam(first_piece,second_piece)){//Rook can't attach friendly pieces
+        if(!checkTeam(first_piece,second_piece)){//Rook can't attach friendly pieces
             return false;
         }
 
