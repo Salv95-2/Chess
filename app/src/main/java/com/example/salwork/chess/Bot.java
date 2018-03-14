@@ -59,6 +59,14 @@ public class Bot implements Player{
 
         possibleMoves = piece.getPossibilities('Q',4,4);
 
+        positions.add(possibleMoves);
+
+        ////
+
+        piece = new King(new KingBehavior(grid));
+
+        possibleMoves = piece.getPossibilities('K',5,4);
+
         possibleMoves.printRowsAnfCols();
 
         positions.add(possibleMoves);
