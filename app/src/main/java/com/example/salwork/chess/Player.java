@@ -1,15 +1,26 @@
 package com.example.salwork.chess;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+
 /**
  * Created by SalWork on 3/8/18.
  */
 
-public interface Player {
+public class Player {
 
+    Piece piece;
+    Grid grid;
+    WhitePiecesLocation whitePiecesLocation;
+    BlackPiecesLocation blackPiecesLocation;
 
+    Player(Grid grid) {
+        this.grid = grid;
+        blackPiecesLocation = new BlackPiecesLocation();
 
-    //Start function
-        //Analyze  all the pieces potential movements
-            //Positions eveluation function
-        //Move pieces with best position evaluation function score
+    }
+
 }
+
+

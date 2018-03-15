@@ -30,9 +30,9 @@ public class Model {
 
         player = new Bot(grid);
 
-        ((Bot)player).findPotentialPositions();
+        ((Bot)player).blackPiecesPotentialPositions();
 
-
+        //what ever function is called needs to return the updated grid so that the view board can get updated
     }
 
 
