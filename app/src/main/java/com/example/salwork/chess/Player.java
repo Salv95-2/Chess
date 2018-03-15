@@ -18,6 +18,7 @@ public class Player {
     Player(Grid grid) {
         this.grid = grid;
         blackPiecesLocation = new BlackPiecesLocation();
+        whitePiecesLocation = new WhitePiecesLocation();
 
     }
 

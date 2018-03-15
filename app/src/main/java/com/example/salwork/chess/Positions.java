@@ -35,6 +35,10 @@ public class Positions {
 
     public void printRowsAnfCols(){
 
+        Log.d("Current Pience: ", String.valueOf(current_piece));
+        Log.d("Current row: ", String.valueOf(current_row));
+        Log.d("Current col: ", String.valueOf(current_col));
+
         for(int i = 0; i < rows.size(); i++){
             Log.d((current_piece + " - rows:"), String.valueOf(rows.get(i)));
             Log.d((current_piece + " - cols:"), String.valueOf(cols.get(i)));
