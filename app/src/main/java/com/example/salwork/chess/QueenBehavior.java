@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class QueenBehavior implements Movement{
 
-    Grid grid;
+    private Grid grid;
 
     QueenBehavior(Grid grid) {
         this.grid = grid;

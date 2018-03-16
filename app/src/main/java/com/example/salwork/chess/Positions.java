@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class Positions {
 
 
-    ArrayList<Integer> rows;
-    ArrayList<Integer> cols;
-    ArrayList<Integer> positionEvalVal;
+    private ArrayList<Integer> rows;
+    private ArrayList<Integer> cols;
+    private ArrayList<Integer> positionEvalVal;
 
-    char current_piece;
-    int current_row;
-    int current_col;
+    private char current_piece;
+    private int current_row;
+    private int current_col;
 
     Positions(char current_piece, int current_row, int current_col, ArrayList<Integer> rows, ArrayList<Integer> cols){
 
@@ -30,6 +30,15 @@ public class Positions {
         positionEvalVal = new ArrayList<Integer>();
         for(int i = 0; i < this.rows.size(); i++){
             positionEvalVal.add(0);
+        }
+    }
+
+    public void printPositionEvalVal(){
+
+        Log.d("Piece", String.valueOf(current_piece));
+
+        for(int i = 0; i < positionEvalVal.size(); i++){
+            Log.d((current_piece + " - posVal:"), String.valueOf(positionEvalVal.get(i)));
         }
     }
 
@@ -69,6 +78,11 @@ public class Positions {
 
     public ArrayList<Integer> getPositionEvalVal(){
         return positionEvalVal;
+    }
+
+    public void setPositionEvalVal(int index){
+
+        positionEvalVal.add(positionEvalVal.get(index) + 1, index);
     }
 
 }

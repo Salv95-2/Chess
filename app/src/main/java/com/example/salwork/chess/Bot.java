@@ -146,11 +146,7 @@ public class Bot extends Player{
             positions.add(possibleMoves);
         }
 
-        for(int i = 0; i < positions.size(); i++){
-
-            positions.get(i).printRowsAnfCols();
-        }
-
+        whitePiecesPotentialPositions();
         return positions;
     }
 
@@ -287,13 +283,39 @@ public class Bot extends Player{
             positions.add(possibleMoves);
         }
 
-        Log.d("WhiteSize", String.valueOf(positions.size()));
-
-        for(int i = 0; i < positions.size(); i++){
-
-            positions.get(i).printRowsAnfCols();
-        }
         return positions;
+    }
+
+
+    public void evaluateBlackPositions(){
+
+        ArrayList<Positions> blacks = blackPiecesPotentialPositions();
+        ArrayList<Positions> whites = whitePiecesPotentialPositions();
+
+
+        for(int i = 0; i < blacks.size(); i++){
+
+            for(int j = 0; j < whites.size(); j++){
+
+                for(int s = 0; s < blacks.get(i).getRows().size(); s++){
+
+                    for(int a = 0; a < whites.get(j).getRows().size(); a++){
+
+                         if(blacks.get(i).getRows().get(s) == whites.get(j).getRows().get(a) &&
+                                blacks.get(i).getColumns().get(s) == whites.get(j).getColumns().get(a)){
+
+                            blacks.get(i).setPositionEvalVal(s);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        for(int i = 0; i < blacks.size(); i++){
+            blacks.get(i).printPositionEvalVal();
+        }
+
     }
 
 }

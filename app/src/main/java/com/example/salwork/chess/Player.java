@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 public class Player {
 
-    Piece piece;
-    Grid grid;
-    WhitePiecesLocation whitePiecesLocation;
-    BlackPiecesLocation blackPiecesLocation;
+    protected Piece piece;
+    protected Grid grid;
+    protected WhitePiecesLocation whitePiecesLocation;
+    protected BlackPiecesLocation blackPiecesLocation;
 
     Player(Grid grid) {
         this.grid = grid;
