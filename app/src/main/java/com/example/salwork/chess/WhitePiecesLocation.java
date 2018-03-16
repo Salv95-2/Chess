@@ -12,8 +12,9 @@ public class WhitePiecesLocation {
     private int[] row;
     private int[] col;
     private char[] piece;
-
+    private boolean[] alive;
     private int[] count;
+
     /*
         0 - Pawns
         1 - Rooks
@@ -28,6 +29,7 @@ public class WhitePiecesLocation {
         row = new int[]{6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7};
         col = new int[]{0,1,2,3,4,5,6,7,0,1,2,3,4,5,6,7};
         piece = new char[]{'P','P','P','P','P','P','P','P','R','H','B','Q','K','B','H','R'};
+        alive = new boolean[]{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
         count = new int[]{8,2,2,2,1,1};
     }
 
@@ -57,35 +59,62 @@ public class WhitePiecesLocation {
             if(piece[i] == 'P'){
                 tempCount[0]++;
             }
+            else {
+                alive[i] = false;
+            }
         }
         //Rooks
         if(piece[8] == 'R'){
             tempCount[1]++;
         }
+        else {
+            alive[8] = false;
+        }
         if(piece[15] == 'R'){
             tempCount[1]++;
+        }
+        else {
+            alive[15] = false;
         }
         //Knights
         if(piece[9] == 'H'){
             tempCount[2]++;
         }
+        else {
+            alive[9] = false;
+        }
         if(piece[14] == 'H'){
             tempCount[2]++;
+        }
+        else {
+            alive[14] = false;
         }
         //Bishops
         if(piece[10] == 'B'){
             tempCount[3]++;
         }
+        else {
+            alive[10] = false;
+        }
         if(piece[13] == 'B'){
             tempCount[3]++;
+        }
+        else {
+            alive[13] = false;
         }
         //Queen
         if(piece[11] == 'Q'){
             tempCount[4]++;
         }
+        else {
+            alive[11] = false;
+        }
         //King
         if(piece[12] == 'K'){
             tempCount[5]++;
+        }
+        else {
+            alive[12] = false;
         }
 
         count = tempCount;
@@ -115,6 +144,11 @@ public class WhitePiecesLocation {
 
         updateCount(grid);
         return piece;
+    }
+
+    boolean[] getAlive(Grid grid){
+        updateCount(grid);
+        return alive;
     }
 
 

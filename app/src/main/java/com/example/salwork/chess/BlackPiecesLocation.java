@@ -12,8 +12,9 @@ public class BlackPiecesLocation {
     private int[] row;
     private int[] col;
     private char[] piece;
-
+    private boolean[] alive;
     private int[] count;
+
     /*
         5 - Pawns
         0 - Rooks
@@ -23,12 +24,12 @@ public class BlackPiecesLocation {
         4 - King **should never go lower than 1
      */
 
-
     BlackPiecesLocation(){
 
         row = new int[]{0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
         col = new int[]{0,1,2,3,4,5,6,7,0,1,2,3,4,5,6,7};
         piece = new char[]{'r','h','b','q','k','b','h','r','p','p','p','p','p','p','p','p'};
+        alive = new boolean[]{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
         count = new int[]{2,2,2,1,1,8};
     }
 
@@ -58,35 +59,63 @@ public class BlackPiecesLocation {
             if(piece[i] == 'p'){
                 tempCount[5]++;
             }
+            else {
+                alive[i] = false;
+            }
         }
         //Rooks
         if(piece[0] == 'r'){
             tempCount[0]++;
         }
+        else {
+            alive[0] = false;
+        }
+
         if(piece[7] == 'r'){
             tempCount[0]++;
+        }
+        else {
+            alive[7] = false;
         }
         //Knights
         if(piece[1] == 'h'){
             tempCount[1]++;
         }
+        else {
+            alive[1] = false;
+        }
         if(piece[6] == 'h'){
             tempCount[1]++;
+        }
+        else {
+            alive[6] = false;
         }
         //Bishops
         if(piece[2] == 'b'){
             tempCount[2]++;
         }
+        else {
+            alive[2] = false;
+        }
         if(piece[5] == 'b'){
             tempCount[2]++;
         }
+        else {
+            alive[5] = false;
+        }
         //Queen
-        if(piece[3] == 'Q'){
+        if(piece[3] == 'q'){
             tempCount[3]++;
         }
+        else {
+            alive[3] = false;
+        }
         //King
-        if(piece[4] == 'K'){
+        if(piece[4] == 'k'){
             tempCount[4]++;
+        }
+        else {
+            alive[4] = false;
         }
 
         count = tempCount;
@@ -116,6 +145,11 @@ public class BlackPiecesLocation {
 
         updateCount(grid);
         return piece;
+    }
+
+    boolean[] getAlive(Grid grid){
+        updateCount(grid);
+        return alive;
     }
 
 
