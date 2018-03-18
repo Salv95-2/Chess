@@ -14,7 +14,7 @@ import java.util.Observer;
 public class MainActivity extends Activity implements Observer, View.OnClickListener {
 
 
-    private Model model;
+    private Model model  = new Model();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,11 @@ public class MainActivity extends Activity implements Observer, View.OnClickList
 
         Log.d("ID", String.valueOf(view.getId()));
 
-        model = new Model();
 
-        updateBoard();
+
 
         model.test();
+        updateBoard();
 
     }
 

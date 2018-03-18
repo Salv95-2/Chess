@@ -13,6 +13,7 @@ public class Model {
     private Grid grid;
 
     private Player player;
+    private BlackPiecesLocation blackPiecesLocation;
 
 
     Model(){
@@ -30,7 +31,10 @@ public class Model {
 
         player = new Bot(grid);
 
-        ((Bot)player).evaluateBlackPositions();
+        Grid newGrid = ((Bot)player).evaluateBlackPositions();
+
+        this.grid = newGrid;
+
 
         //what ever function is called needs to return the updated grid so that the view board can get updated
     }

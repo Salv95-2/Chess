@@ -1,5 +1,7 @@
 package com.example.salwork.chess;
 
+import android.util.Log;
+
 /**
  * Created by SalWork on 3/7/18.
  */
@@ -8,6 +10,8 @@ public class Grid {
 
     private char [][] gridPieces;
     private int [][] gridViewIds;
+    protected BlackPiecesLocation blackPiecesLocation;
+
 
     int size = 8;
 
@@ -19,7 +23,7 @@ public class Grid {
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
-                {'#', '#', '#', '#', 'K', '#', '#', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
                 {'R', 'H', 'B', 'Q', 'K', 'B', 'H', 'R'}
         };
@@ -34,6 +38,8 @@ public class Grid {
                 {2131099758, 2131099758, 2131099758, 2131099758, 2131099758, 2131099758, 2131099758, 2131099758},
                 {2131099760, 2131099757, 2131099755, 2131099759, 2131099756, 2131099755, 2131099757, 2131099760}
         };
+
+        blackPiecesLocation = new BlackPiecesLocation();
     }
 
     public void updateVieIds(){
@@ -88,6 +94,16 @@ public class Grid {
     public char[][] getGridPiecesArr(){
 
         return gridPieces;
+    }
+
+    public void printGridArr(){
+
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+
+                Log.d("Piece: ", String.valueOf(gridPieces[i][j]) + ": " + i + " : " + j);
+            }
+        }
     }
 
     public void updateGridPiecesArr(int first_row, int first_col, int second_row, int second_col){

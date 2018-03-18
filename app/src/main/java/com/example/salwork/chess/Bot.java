@@ -290,16 +290,20 @@ public class Bot extends Player{
         return positions;
     }
 
-    public void evaluateBlackPositions(){
+    public Grid evaluateBlackPositions(){
 
         countBlackWhitePieceIntersections();
 
-        BestMove m = getRandomMaxMove();
-        Log.d("BestChosenMoveRow", String.valueOf(m.getCurrentRow()));
-        Log.d("BestChosenMoveCol", String.valueOf(m.getCurrentCol()));
-        Log.d("BestChosenMovePiece", String.valueOf(grid.getGridPiecesArr()[m.getCurrentRow()][m.getCurrentCol()]));
+        BestMove best_move = getRandomMaxMove();
 
+        grid.updateGridPiecesArr(best_move.getCurrentRow(), best_move.getCurrentCol(),
+                best_move.getBestMoveRow(), best_move.getBestMoveCol());
+        grid.blackPiecesLocation.upDateLocation(best_move.getCurrentRow(), best_move.getCurrentCol(),
+                best_move.getBestMoveRow(), best_move.getBestMoveCol(), grid);
 
+//        grid.blackPiecesLocation.printLocations();
+
+        return grid;
 
     }
 
@@ -310,8 +314,12 @@ public class Bot extends Player{
 
         for(int i = 0; i < blacks.size(); i++) {//run through every black position object
 
+//            Log.d("BesMovePiece", String.valueOf(blacks.get(i).getCurrentPiece()));
             for (int s = 0; s < blacks.get(i).getRows().size(); s++) {
 
+                Log.d("MoveRows", String.valueOf(blacks.get(i).getRows().get(s)));
+                Log.d("MoveCols", String.valueOf(blacks.get(i).getColumns().get(s)));
+                Log.d("MoveEval", String.valueOf(blacks.get(i).getPositionEvalVal().get(s)));
                 if(blacks.get(i).getPositionEvalVal().get(s) > max){
 
                     max = blacks.get(i).getPositionEvalVal().get(s);
@@ -337,24 +345,25 @@ public class Bot extends Player{
 
         }
 
-        Random rand = new Random();
-        int  index = rand.nextInt(best_move.size() - 1) + 0;
+            Log.d("MovesAmt", String.valueOf(best_move.size()));
+            Random rand = new Random();
+            int  index = rand.nextInt(best_move.size() - 1) + 0;
 
-        return best_move.get(index);
+            return best_move.get(index);
+
+
     }
 
 
     public void countBlackWhitePieceIntersections(){
 
-        blacks = blackPiecesPotentialPositions(grid,blackPiecesLocation);
+        blacks = blackPiecesPotentialPositions(grid,grid.blackPiecesLocation);
         whites = whitePiecesPotentialPositions(grid, whitePiecesLocation);
+
 
         for(int i = 0; i < blacks.size(); i++){//run through every black position object
 
             for(int s = 0; s < blacks.get(i).getRows().size(); s++){//run through every row & col element for a black position object
-
-                // this is where a temporary grid will be made
-
 
                 for(int j = 0; j < whites.size(); j++){//run through every white position object
 
@@ -364,7 +373,7 @@ public class Bot extends Player{
                         if(blacks.get(i).getRows().get(s) == whites.get(j).getRows().get(a) &&
                                 blacks.get(i).getColumns().get(s) == whites.get(j).getColumns().get(a)){
 
-                            blacks.get(i).addOneToPositionEvalVal(s);
+                            blacks.get(i).subtractOneFromPositionEvalVal(s);
                         }
                     }
                 }
