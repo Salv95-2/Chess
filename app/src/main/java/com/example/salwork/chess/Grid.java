@@ -16,7 +16,7 @@ public class Grid {
         gridPieces = new char[][]{
                 {'r', 'h', 'b', 'q', 'k', 'b', 'h', 'r'},//white: uppercase, black: lowercase
                 {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                {'#', '#', '#', '#', 'K', '#', '#', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'#', '#', '#', '#', 'K', '#', '#', '#'},
@@ -88,5 +88,11 @@ public class Grid {
     public char[][] getGridPiecesArr(){
 
         return gridPieces;
+    }
+
+    public void updateGridPiecesArr(int first_row, int first_col, int second_row, int second_col){
+
+        gridPieces[second_row][second_col] = gridPieces[first_row][first_col];
+        gridPieces[first_row][first_col] = '#';
     }
 }

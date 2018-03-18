@@ -151,6 +151,19 @@ public class WhitePiecesLocation {
         return alive;
     }
 
+    int getAliveCount(){
+
+        int count = 0;
+        for(int i = 0; i < alive.length; i++){
+
+            if(alive[i]){
+                count++;
+            }
+        }
+        return count;
+    }
+
+
 
 
     public void printLocations(){

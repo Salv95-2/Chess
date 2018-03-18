@@ -80,9 +80,14 @@ public class Positions {
         return positionEvalVal;
     }
 
-    public void setPositionEvalVal(int index){
+    public void addOneToPositionEvalVal(int index){
 
-        positionEvalVal.add(positionEvalVal.get(index) + 1, index);
+        positionEvalVal.set(index, positionEvalVal.get(index) + 1);
+    }
+
+    public void subtractOneFromPositionEvalVal(int index){
+
+        positionEvalVal.set(index, positionEvalVal.get(index) - 1);
     }
 
 }
