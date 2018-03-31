@@ -1,5 +1,7 @@
 package com.example.salwork.chess;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -36,6 +38,7 @@ public class WhitePawnBehavior implements Movement {
     }
 
     public boolean isOpponent(char piece){
+
 
         switch (piece){
             case 'r':
@@ -116,6 +119,8 @@ public class WhitePawnBehavior implements Movement {
 
         return false;
     }
+
+
 
     @Override
     public Positions getPossiblePositions(char first_piece, int first_piece_row, int first_piece_col){//need to make this function not be O(2)

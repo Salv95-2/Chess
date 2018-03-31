@@ -12,12 +12,9 @@ public class Player {
 
     protected Piece piece;
     protected Grid grid;
-    protected WhitePiecesLocation whitePiecesLocation;
 
     Player(Grid grid) {
         this.grid = grid;
-        whitePiecesLocation = new WhitePiecesLocation();
-
     }
 
 }

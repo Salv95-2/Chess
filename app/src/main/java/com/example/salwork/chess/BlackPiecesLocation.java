@@ -33,6 +33,15 @@ public class BlackPiecesLocation {
         count = new int[]{2,2,2,1,1,8};
     }
 
+//    BlackPiecesLocation(BlackPiecesLocation blacks,Grid grid){
+//
+//        setRow(blacks.getRows(grid));
+//        setCol(blacks.getColumns(grid));
+//        setPiece(blacks.getPiece(grid));
+//        setAlive(blacks.getAlive(grid));
+//        setCount(blacks.getCount(grid));
+//    }
+
     public void printCount(Grid grid){
 
         updateCount(grid);
@@ -162,6 +171,41 @@ public class BlackPiecesLocation {
             }
         }
         return count;
+    }
+
+    void setRow(int [] row){
+
+        for(int i = 0; i < row.length; i++){
+            this.row[i] = row[i];
+        }
+    }
+
+    void setCol(int [] col){
+
+        for(int i = 0; i < col.length; i++){
+            this.col[i] = col[i];
+        }
+    }
+
+    void setPiece(char [] piece){
+
+        for(int i = 0; i < piece.length; i++){
+            this.piece[i] = piece[i];
+        }
+    }
+
+    void setAlive(boolean [] alive){
+
+        for(int i = 0; i < alive.length; i++){
+            this.alive[i] = alive[i];
+        }
+    }
+
+    void setCount(int [] count){
+
+        for(int i = 0; i < count.length; i++){
+            this.count[i] = count[i];
+        }
     }
 
 

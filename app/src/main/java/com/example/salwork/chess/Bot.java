@@ -16,6 +16,8 @@ public class Bot extends Player{
 
     Bot(Grid grid) {
         super(grid);
+        blacks = new ArrayList<Positions>();
+        whites = new ArrayList<Positions>();
     }
 
 
@@ -159,6 +161,7 @@ public class Bot extends Player{
         ArrayList<Positions> positions = new ArrayList<Positions>();
         Positions possibleMoves;
 
+
         //Pawn 1 (from left to right)
         if(temp_white_piece_locations.getAlive(temp_grid)[0]){
             piece = new Pawn(new WhitePawnBehavior(temp_grid));
@@ -292,34 +295,80 @@ public class Bot extends Player{
 
     public Grid evaluateBlackPositions(){
 
+        Log.d("----------------","----------------------------------------");
+
+
         countBlackWhitePieceIntersections();
+
 
         BestMove best_move = getRandomMaxMove();
 
+        grid.upDateLocation(best_move.getCurrentRow(), best_move.getCurrentCol(),
+                best_move.getBestMoveRow(), best_move.getBestMoveCol(), grid);
         grid.updateGridPiecesArr(best_move.getCurrentRow(), best_move.getCurrentCol(),
                 best_move.getBestMoveRow(), best_move.getBestMoveCol());
-        grid.blackPiecesLocation.upDateLocation(best_move.getCurrentRow(), best_move.getCurrentCol(),
-                best_move.getBestMoveRow(), best_move.getBestMoveCol(), grid);
 
-//        grid.blackPiecesLocation.printLocations();
 
-        return grid;
 
+
+
+
+        //printMovement();
+
+        Grid tempGrid = new Grid(grid);
+
+        countBlackWhitePieceIntersections();
+
+
+
+        return tempGrid;
+
+    }
+
+    public void printMovement(){
+
+
+//        int max = -1000;
+//        for(int i = 0; i < blacks.size(); i++) {//run through every black position object
+//
+//            Log.d("BesMovePiece", String.valueOf(blacks.get(i).getCurrentPiece()));
+//            for (int s = 0; s < blacks.get(i).getRows().size(); s++) {
+//                Log.d("CurrRows", String.valueOf(blacks.get(i).getCurrentRow()));
+//                Log.d("CurrCols", String.valueOf(blacks.get(i).getCurrentCol()));
+//                Log.d("MoveRows", String.valueOf(blacks.get(i).getRows().get(s)));
+//                Log.d("MoveCols", String.valueOf(blacks.get(i).getColumns().get(s)));
+//                Log.d("MoveEval", String.valueOf("///////" + blacks.get(i).getPositionEvalVal().get(s)) + "///////");
+//                if(blacks.get(i).getPositionEvalVal().get(s) > max){
+//
+//                    max = blacks.get(i).getPositionEvalVal().get(s);
+//
+//                }
+//
+//            }
+//
+//        }
+
+        for(int i = 0; i < blacks.size(); i++){
+            for(int j = 0; j < blacks.get(i).getRows().size(); j++){
+
+                Log.d("Piece", String.valueOf(blacks.get(i).getCurrentPiece()));
+                Log.d("Eval", String.valueOf(blacks.get(i).getPositionEvalVal()));
+            }
+        }
     }
 
     public BestMove getRandomMaxMove(){
 
+//        Log.d("BlackSize2", String.valueOf(blacks.size()));
+
         int max = -1000;
         ArrayList<BestMove> best_move = new ArrayList<BestMove>();
 
+
         for(int i = 0; i < blacks.size(); i++) {//run through every black position object
 
-//            Log.d("BesMovePiece", String.valueOf(blacks.get(i).getCurrentPiece()));
             for (int s = 0; s < blacks.get(i).getRows().size(); s++) {
 
-                Log.d("MoveRows", String.valueOf(blacks.get(i).getRows().get(s)));
-                Log.d("MoveCols", String.valueOf(blacks.get(i).getColumns().get(s)));
-                Log.d("MoveEval", String.valueOf(blacks.get(i).getPositionEvalVal().get(s)));
                 if(blacks.get(i).getPositionEvalVal().get(s) > max){
 
                     max = blacks.get(i).getPositionEvalVal().get(s);
@@ -345,7 +394,11 @@ public class Bot extends Player{
 
         }
 
-            Log.d("MovesAmt", String.valueOf(best_move.size()));
+            if(best_move.size() <= 1){
+                return best_move.get(0);
+            }
+
+//            Log.d("MovesAmt", String.valueOf(best_move.size()));
             Random rand = new Random();
             int  index = rand.nextInt(best_move.size() - 1) + 0;
 
@@ -355,32 +408,150 @@ public class Bot extends Player{
     }
 
 
-    public void countBlackWhitePieceIntersections(){
+    //why is this getting printed a step behind???
+    public void printWhitePossibles(ArrayList<Positions> whites1){
 
-        blacks = blackPiecesPotentialPositions(grid,grid.blackPiecesLocation);
-        whites = whitePiecesPotentialPositions(grid, whitePiecesLocation);
+        for(int i = 0; i < whites1.size(); i++){
+            Log.d("Piece", String.valueOf(whites1.get(i).getCurrentPiece()));
+            for(int j = 0; j < whites1.get(i).getRows().size(); j++){
+
+                Log.d("Rows", String.valueOf(whites1.get(i).getRows().get(j)));
+                Log.d("Cols", String.valueOf(whites1.get(i).getColumns().get(j)));
+                Log.d("EvalVal", String.valueOf(whites1.get(i).getPositionEvalVal()));
 
 
-        for(int i = 0; i < blacks.size(); i++){//run through every black position object
+            }
+        }
+    }
 
-            for(int s = 0; s < blacks.get(i).getRows().size(); s++){//run through every row & col element for a black position object
+    public void printBlackPossibles(ArrayList<Positions> blacks1){
 
-                for(int j = 0; j < whites.size(); j++){//run through every white position object
+        for(int i = 0; i < blacks1.size(); i++){
+            Log.d("Piece", String.valueOf(blacks1.get(i).getCurrentPiece()));
+            for(int j = 0; j < blacks1.get(i).getRows().size(); j++){
+
+                Log.d("Rows", String.valueOf(blacks1.get(i).getRows().get(j)));
+                Log.d("Cols", String.valueOf(blacks1.get(i).getColumns().get(j)));
+                Log.d("EvalVal", String.valueOf(blacks1.get(i).getPositionEvalVal()));
 
 
-                    for(int a = 0; a < whites.get(j).getRows().size(); a++){//run through every row & col element for a white position object
+            }
+        }
+    }
 
-                        if(blacks.get(i).getRows().get(s) == whites.get(j).getRows().get(a) &&
-                                blacks.get(i).getColumns().get(s) == whites.get(j).getColumns().get(a)){
+    //this function is messing up the black pieces locations
+    public void countBlackWhitePieceIntersections() {
 
-                            blacks.get(i).subtractOneFromPositionEvalVal(s);
+
+
+        blacks = blackPiecesPotentialPositions(grid, grid.getBlackPieceLocations());
+        whites = whitePiecesPotentialPositions(grid, grid.getWhitePieceLocations());
+
+
+
+
+        Grid tempt_grid = new Grid(grid);
+        BlackPiecesLocation temp_black_piece_locations;
+        WhitePiecesLocation temp_white_piece_locations;
+
+        ArrayList<Positions> blacks_temp;
+        ArrayList<Positions> whites_temp;
+
+        BestMove bestMove;
+        int eval = -1000;
+
+        //best moves (an array because many moves may have the same best evaluations)
+        ArrayList<BestMove> allBestMoves = new ArrayList<BestMove>();
+
+        for (int i = 0; i < blacks.size(); i++) {//run through every black position object
+
+//            Log.d("OuterPiece:", String.valueOf(blacks.get(i).getCurrentPiece()) + "--- ORIGINAL");
+//            Log.d("OuterAmount:", String.valueOf(blacks.get(i).getRows().size()));
+
+            for (int s = 0; s < blacks.get(i).getRows().size(); s++) {//run through every row & col element of a black position object
+
+
+
+
+                tempt_grid = new Grid(grid);
+                temp_black_piece_locations = tempt_grid.getBlackPieceLocations();
+
+                //temporarily updated grid
+                tempt_grid.updateGridPiecesArr(blacks.get(i).getCurrentRow(), blacks.get(i).getCurrentCol(),
+                        blacks.get(i).getRows().get(s), blacks.get(i).getColumns().get(s));
+
+
+
+                //temporarily updated black piece potential locations
+                temp_black_piece_locations.upDateLocation(blacks.get(i).getCurrentRow(), blacks.get(i).getCurrentCol(),
+                        blacks.get(i).getRows().get(s), blacks.get(i).getColumns().get(s), tempt_grid);
+
+                //temporary black and white potential locations
+                blacks_temp = blackPiecesPotentialPositions(tempt_grid, temp_black_piece_locations);
+                whites_temp = whitePiecesPotentialPositions(tempt_grid, tempt_grid.getWhitePieceLocations());
+
+//                Log.d("CurrentBlackPiece", String.valueOf(blacks.get(i).getCurrentPiece()));
+//                Log.d("CurrentBlackRow", String.valueOf(blacks.get(i).getCurrentRow()));
+//                Log.d("CurrentBlackCol", String.valueOf(blacks.get(i).getCurrentCol()));
+//                Log.d("CurrentBlackTempSize", String.valueOf(blacks_temp.size()));
+//
+
+
+                for (int x = 0; x < blacks_temp.size(); x++) {
+
+//                    Log.d("InnerPiece:", String.valueOf(blacks_temp.get(x).getCurrentPiece()));
+//                    Log.d("InnerAmount:", String.valueOf(blacks_temp.get(x).getRows().size()));
+
+
+                    //Compare to current white pieces
+
+//                    Log.d("BlackPiece", String.valueOf(tempt_grid.getGridPiecesArr()[blacks_temp.get(x).getCurrentRow()][blacks_temp.get(x).getCurrentCol()]));
+//                    Log.d("BlackRow", String.valueOf(blacks_temp.get(x).getCurrentRow()));
+//                    Log.d("BlackCol", String.valueOf(blacks_temp.get(x).getCurrentCol()));
+
+                    for(int a = 0; a < whites_temp.size(); a++){
+//                        Log.d("BlackSizeInne", String.valueOf(blacks.size()));
+
+                        for(int b = 0; b < whites_temp.get(a).getRows().size(); b++){
+
+//                            Log.d("}}}}}}}}}}}}", "}}}}}}}}}}}}}}}}}}}");
+//
+//                            Log.d("whitePieceVals", String.valueOf(whites.get(a).getCurrentPiece()));
+//
+//                            Log.d("whiteRowVals", String.valueOf(whites.get(a).getRows().get(b)));
+//                            Log.d("whiteColVals", String.valueOf(whites.get(a).getColumns().get(b)));
+                            whites_temp = whitePiecesPotentialPositions(tempt_grid, tempt_grid.getWhitePieceLocations());
+//
+//                            Log.d("Index", String.valueOf(b));
+//                            Log.d("whitePiece", String.valueOf(tempt_grid.getGridPiecesArr()[whites_temp.get(a).getRows().get(b)][whites_temp.get(a).getColumns().get(b)]));
+//                            Log.d("whiteRow", String.valueOf(whites_temp.get(a).getRows().get(b)));
+//                            Log.d("whiteCol", String.valueOf(whites_temp.get(a).getColumns().get(b)));
+//
+
+
+                            if(whites_temp.get(a).getRows().get(b) == blacks_temp.get(x).getCurrentRow() &&
+                                    whites_temp.get(a).getColumns().get(b) == blacks_temp.get(x).getCurrentCol()){
+
+
+                                blacks.get(i).subtractOneFromPositionEvalVal(s);
+                                Log.d("blackPiece", String.valueOf(blacks.get(i).getCurrentPiece()));
+                                Log.d("blackPieceRow", String.valueOf(blacks.get(i).getRows().get(s)));
+                                Log.d("blackPieceCol", String.valueOf(blacks.get(i).getColumns().get(s)));
+
+                                Log.d("testPosEval", String.valueOf(blacks.get(i).getPositionEvalVal()));
+                            }
                         }
                     }
                 }
+
+//                findOpponentPossiblePositionsIntersections(blacks_temp, whites_temp);
+
             }
+
+//            Log.d("////////////", "//////////////////////////");
+
+
         }
-
-
 
     }
 
