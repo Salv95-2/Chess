@@ -470,9 +470,6 @@ public class Bot extends Player{
 
             for (int s = 0; s < blacks.get(i).getRows().size(); s++) {//run through every row & col element of a black position object
 
-
-
-
                 tempt_grid = new Grid(grid);
                 temp_black_piece_locations = tempt_grid.getBlackPieceLocations();
 
@@ -486,48 +483,19 @@ public class Bot extends Player{
                 temp_black_piece_locations.upDateLocation(blacks.get(i).getCurrentRow(), blacks.get(i).getCurrentCol(),
                         blacks.get(i).getRows().get(s), blacks.get(i).getColumns().get(s), tempt_grid);
 
-                //temporary black and white potential locations
+                //temporary updated black and white potential locations
                 blacks_temp = blackPiecesPotentialPositions(tempt_grid, temp_black_piece_locations);
                 whites_temp = whitePiecesPotentialPositions(tempt_grid, tempt_grid.getWhitePieceLocations());
 
-//                Log.d("CurrentBlackPiece", String.valueOf(blacks.get(i).getCurrentPiece()));
-//                Log.d("CurrentBlackRow", String.valueOf(blacks.get(i).getCurrentRow()));
-//                Log.d("CurrentBlackCol", String.valueOf(blacks.get(i).getCurrentCol()));
-//                Log.d("CurrentBlackTempSize", String.valueOf(blacks_temp.size()));
-//
 
 
                 for (int x = 0; x < blacks_temp.size(); x++) {
 
-//                    Log.d("InnerPiece:", String.valueOf(blacks_temp.get(x).getCurrentPiece()));
-//                    Log.d("InnerAmount:", String.valueOf(blacks_temp.get(x).getRows().size()));
-
-
-                    //Compare to current white pieces
-
-//                    Log.d("BlackPiece", String.valueOf(tempt_grid.getGridPiecesArr()[blacks_temp.get(x).getCurrentRow()][blacks_temp.get(x).getCurrentCol()]));
-//                    Log.d("BlackRow", String.valueOf(blacks_temp.get(x).getCurrentRow()));
-//                    Log.d("BlackCol", String.valueOf(blacks_temp.get(x).getCurrentCol()));
-
                     for(int a = 0; a < whites_temp.size(); a++){
-//                        Log.d("BlackSizeInne", String.valueOf(blacks.size()));
 
                         for(int b = 0; b < whites_temp.get(a).getRows().size(); b++){
 
-//                            Log.d("}}}}}}}}}}}}", "}}}}}}}}}}}}}}}}}}}");
-//
-//                            Log.d("whitePieceVals", String.valueOf(whites.get(a).getCurrentPiece()));
-//
-//                            Log.d("whiteRowVals", String.valueOf(whites.get(a).getRows().get(b)));
-//                            Log.d("whiteColVals", String.valueOf(whites.get(a).getColumns().get(b)));
-                            whites_temp = whitePiecesPotentialPositions(tempt_grid, tempt_grid.getWhitePieceLocations());
-//
-//                            Log.d("Index", String.valueOf(b));
-//                            Log.d("whitePiece", String.valueOf(tempt_grid.getGridPiecesArr()[whites_temp.get(a).getRows().get(b)][whites_temp.get(a).getColumns().get(b)]));
-//                            Log.d("whiteRow", String.valueOf(whites_temp.get(a).getRows().get(b)));
-//                            Log.d("whiteCol", String.valueOf(whites_temp.get(a).getColumns().get(b)));
-//
-
+                            //whites_temp = whitePiecesPotentialPositions(tempt_grid, tempt_grid.getWhitePieceLocations());
 
                             if(whites_temp.get(a).getRows().get(b) == blacks_temp.get(x).getCurrentRow() &&
                                     whites_temp.get(a).getColumns().get(b) == blacks_temp.get(x).getCurrentCol()){
@@ -544,11 +512,7 @@ public class Bot extends Player{
                     }
                 }
 
-//                findOpponentPossiblePositionsIntersections(blacks_temp, whites_temp);
-
             }
-
-//            Log.d("////////////", "//////////////////////////");
 
 
         }
