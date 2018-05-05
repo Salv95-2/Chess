@@ -311,15 +311,13 @@ public class Bot extends Player{
 
 
 
-
-
-        //printMovement();
-
         Grid tempGrid = new Grid(grid);
 
         countBlackWhitePieceIntersections();
 
+        //printMovement();
 
+        //grid.printBlackPiecesLocations();
 
         return tempGrid;
 
@@ -359,8 +357,6 @@ public class Bot extends Player{
 
     public BestMove getRandomMaxMove(){
 
-//        Log.d("BlackSize2", String.valueOf(blacks.size()));
-
         int max = -1000;
         ArrayList<BestMove> best_move = new ArrayList<BestMove>();
 
@@ -398,9 +394,9 @@ public class Bot extends Player{
                 return best_move.get(0);
             }
 
-//            Log.d("MovesAmt", String.valueOf(best_move.size()));
             Random rand = new Random();
-            int  index = rand.nextInt(best_move.size() - 1) + 0;
+
+            int  index = rand.nextInt((best_move.size())) + 0;
 
             return best_move.get(index);
 
@@ -442,13 +438,8 @@ public class Bot extends Player{
     //this function is messing up the black pieces locations
     public void countBlackWhitePieceIntersections() {
 
-
-
         blacks = blackPiecesPotentialPositions(grid, grid.getBlackPieceLocations());
         whites = whitePiecesPotentialPositions(grid, grid.getWhitePieceLocations());
-
-
-
 
         Grid tempt_grid = new Grid(grid);
         BlackPiecesLocation temp_black_piece_locations;
@@ -464,9 +455,6 @@ public class Bot extends Player{
         ArrayList<BestMove> allBestMoves = new ArrayList<BestMove>();
 
         for (int i = 0; i < blacks.size(); i++) {//run through every black position object
-
-//            Log.d("OuterPiece:", String.valueOf(blacks.get(i).getCurrentPiece()) + "--- ORIGINAL");
-//            Log.d("OuterAmount:", String.valueOf(blacks.get(i).getRows().size()));
 
             for (int s = 0; s < blacks.get(i).getRows().size(); s++) {//run through every row & col element of a black position object
 
@@ -500,13 +488,8 @@ public class Bot extends Player{
                             if(whites_temp.get(a).getRows().get(b) == blacks_temp.get(x).getCurrentRow() &&
                                     whites_temp.get(a).getColumns().get(b) == blacks_temp.get(x).getCurrentCol()){
 
-
-                                blacks.get(i).subtractOneFromPositionEvalVal(s);
-                                Log.d("blackPiece", String.valueOf(blacks.get(i).getCurrentPiece()));
-                                Log.d("blackPieceRow", String.valueOf(blacks.get(i).getRows().get(s)));
-                                Log.d("blackPieceCol", String.valueOf(blacks.get(i).getColumns().get(s)));
-
-                                Log.d("testPosEval", String.valueOf(blacks.get(i).getPositionEvalVal()));
+                                //sets position eval to one if the future move could be attacked
+                                blacks.get(i).setPositionEvalValtoNegativeOne(s);
                             }
                         }
                     }

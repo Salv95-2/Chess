@@ -53,10 +53,10 @@ public class Grid {
                 {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
-                {'#', '#', '#', '#', '#', '#', '#', '#'},
+                {'#', '#', '#', 'Q', '#', '#', '#', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                {'R', 'H', 'B', 'Q', 'K', 'B', 'H', 'R'}
+                {'R', 'H', 'B', '#', 'K', 'B', 'H', 'R'}
         };
 
         gridViewIds = new int[][]{
@@ -169,6 +169,10 @@ public class Grid {
 
     public BlackPiecesLocation getBlackPieceLocations(){
         return  blackPiecesLocation;
+    }
+
+    public void printBlackPiecesLocations(){
+        blackPiecesLocation.printLocations();
     }
 
 

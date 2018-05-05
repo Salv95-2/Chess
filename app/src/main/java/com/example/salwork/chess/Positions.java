@@ -90,4 +90,9 @@ public class Positions {
         positionEvalVal.set(index, positionEvalVal.get(index) - 1);
     }
 
+    public void setPositionEvalValtoNegativeOne(int index){
+
+        positionEvalVal.set(index, -1);
+    }
+
 }

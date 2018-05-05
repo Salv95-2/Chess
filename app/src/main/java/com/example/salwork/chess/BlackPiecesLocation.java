@@ -29,6 +29,7 @@ public class BlackPiecesLocation {
         row = new int[]{0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
         col = new int[]{0,1,2,3,4,5,6,7,0,1,2,3,4,5,6,7};
         piece = new char[]{'r','h','b','q','k','b','h','r','p','p','p','p','p','p','p','p'};
+
         alive = new boolean[]{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
         count = new int[]{2,2,2,1,1,8};
     }
