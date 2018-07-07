@@ -435,11 +435,12 @@ public class Bot extends Player{
         }
     }
 
-    //this function is messing up the black pieces locations
     public void countBlackWhitePieceIntersections() {
 
         blacks = blackPiecesPotentialPositions(grid, grid.getBlackPieceLocations());
         whites = whitePiecesPotentialPositions(grid, grid.getWhitePieceLocations());
+
+        PositionEvaluation positionEval;
 
         Grid tempt_grid = new Grid(grid);
         BlackPiecesLocation temp_black_piece_locations;
@@ -451,8 +452,7 @@ public class Bot extends Player{
         BestMove bestMove;
         int eval = -1000;
 
-        //best moves (an array because many moves may have the same best evaluations)
-        ArrayList<BestMove> allBestMoves = new ArrayList<BestMove>();
+
 
         for (int i = 0; i < blacks.size(); i++) {//run through every black position object
 
@@ -466,7 +466,6 @@ public class Bot extends Player{
                         blacks.get(i).getRows().get(s), blacks.get(i).getColumns().get(s));
 
 
-
                 //temporarily updated black piece potential locations
                 temp_black_piece_locations.upDateLocation(blacks.get(i).getCurrentRow(), blacks.get(i).getCurrentCol(),
                         blacks.get(i).getRows().get(s), blacks.get(i).getColumns().get(s), tempt_grid);
@@ -477,23 +476,15 @@ public class Bot extends Player{
 
 
 
-                for (int x = 0; x < blacks_temp.size(); x++) {
+                positionEval = new PositionEvaluation(tempt_grid, blacks_temp, whites_temp, blacks, i,s,
+                        temp_black_piece_locations, tempt_grid.getWhitePieceLocations());
 
-                    for(int a = 0; a < whites_temp.size(); a++){
 
-                        for(int b = 0; b < whites_temp.get(a).getRows().size(); b++){
 
-                            //whites_temp = whitePiecesPotentialPositions(tempt_grid, tempt_grid.getWhitePieceLocations());
+                positionEval.evaluateIntersections();
+                positionEval.evaluateTotalPiecesOnEachTeam();
 
-                            if(whites_temp.get(a).getRows().get(b) == blacks_temp.get(x).getCurrentRow() &&
-                                    whites_temp.get(a).getColumns().get(b) == blacks_temp.get(x).getCurrentCol()){
-
-                                //sets position eval to one if the future move could be attacked
-                                blacks.get(i).setPositionEvalValtoNegativeOne(s);
-                            }
-                        }
-                    }
-                }
+                blacks.get(i).printPositionEvalVal();
 
             }
 
