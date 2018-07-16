@@ -484,7 +484,7 @@ public class Bot extends Player{
                 positionEval.evaluateIntersections();
                 positionEval.evaluateTotalPiecesOnEachTeam();
 
-                blacks.get(i).printPositionEvalVal();
+               // blacks.get(i).printPositionEvalVal();
 
             }
 

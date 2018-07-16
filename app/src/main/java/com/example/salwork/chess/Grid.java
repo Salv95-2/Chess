@@ -9,7 +9,9 @@ import android.util.Log;
 public class Grid {
 
     private char [][] gridPieces;
+    private String [][] gridViewTags;
     private int [][] gridViewIds;
+
     private BlackPiecesLocation blackPiecesLocation;
     private WhitePiecesLocation whitePiecesLocation;
 
@@ -28,6 +30,17 @@ public class Grid {
                 {'#', '#', '#', '#', '#', '#', '#', '#'},
                 {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
                 {'R', 'H', 'B', 'Q', 'K', 'B', 'H', 'R'}
+        };
+
+        gridViewTags = new String[][]{
+                {"b_rook", "b_knight", "b_bishop", "b_queen", "b_king", "b_bishop", "b_knight", "b_rook"},
+                {"b_pawn", "b_pawn", "b_pawn", "b_pawn", "b_pawn", "b_pawn", "b_pawn", "b_pawn"},
+                {"empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+                {"empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+                {"empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+                {"empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+                {"w_pawn", "w_pawn", "w_pawn", "w_pawn", "w_pawn", "w_pawn", "w_pawn", "w_pawn"},
+                {"w_rook", "w_knight", "w_bishop", "w_queen", "w_king", "w_bishop", "w_knight", "w_rook"}
         };
 
         gridViewIds = new int[][]{
@@ -59,6 +72,17 @@ public class Grid {
                 {'R', 'H', 'B', '#', 'K', 'B', 'H', 'R'}
         };
 
+        gridViewTags = new String[][]{
+                {"b_rook", "b_knight", "b_bishop", "b_queen", "b_king", "b_bishop", "b_knight", "b_rook"},
+                {"b_pawn", "b_pawn", "b_pawn", "b_pawn", "b_pawn", "b_pawn", "b_pawn", "b_pawn"},
+                {"empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+                {"empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+                {"empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+                {"empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+                {"w_pawn", "w_pawn", "w_pawn", "w_pawn", "w_pawn", "w_pawn", "w_pawn", "w_pawn"},
+                {"w_rook", "w_knight", "w_bishop", "w_queen", "w_king", "w_bishop", "w_knight", "w_rook"}
+        };
+
         gridViewIds = new int[][]{
                 {2131099737, 2131099734, 2131099732, 2131099736, 2131099733, 2131099732, 2131099734, 2131099737},
                 {2131099735, 2131099735, 2131099735, 2131099735, 2131099735, 2131099735, 2131099735, 2131099735},
@@ -75,6 +99,7 @@ public class Grid {
             for(int j = 0; j < size; j++){
                 this.gridPieces[i][j] =  old_grid.gridPieces[i][j];
                 this.gridViewIds[i][j] =  old_grid.gridViewIds[i][j];
+                this.gridViewTags[i][j] =  old_grid.gridViewTags[i][j];
             }
         }
 
@@ -93,7 +118,7 @@ public class Grid {
         }
     }
 
-    public void updateVieIds(){
+    public void updateViewIdAndTag(){
 
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
@@ -101,32 +126,44 @@ public class Grid {
                 switch (gridPieces[i][j]){
 
                     case 'r': gridViewIds[i][j] = 2131099737;
+                              gridViewTags[i][j] = "b_rook";
                               break;
                     case 'h': gridViewIds[i][j] = 2131099734;
+                              gridViewTags[i][j] = "b_knight";
                               break;
                     case 'b': gridViewIds[i][j] = 2131099732;
+                              gridViewTags[i][j] = "b_bishop";
                               break;
                     case 'q': gridViewIds[i][j] = 2131099736;
+                              gridViewTags[i][j] = "b_queen";
                               break;
                     case 'k': gridViewIds[i][j] = 2131099733;
+                              gridViewTags[i][j] = "b_king";
                               break;
                     case 'p': gridViewIds[i][j] = 2131099735;
+                              gridViewTags[i][j] = "b_pawn";
                               break;
-
                     case 'R': gridViewIds[i][j] = 2131099760;
-                        break;
+                              gridViewTags[i][j] = "b_rook";
+                              break;
                     case 'H': gridViewIds[i][j] = 2131099757;
-                        break;
+                              gridViewTags[i][j] = "w_knight";
+                              break;
                     case 'B': gridViewIds[i][j] = 2131099755;
-                        break;
+                              gridViewTags[i][j] = "w_bishop";
+                              break;
                     case 'Q': gridViewIds[i][j] = 2131099759;
-                        break;
+                              gridViewTags[i][j] = "w_queen";
+                              break;
                     case 'K': gridViewIds[i][j] = 2131099756;
-                        break;
+                              gridViewTags[i][j] = "w_king";
+                              break;
                     case 'P': gridViewIds[i][j] = 2131099758;
-                        break;
-
-                    default: gridViewIds[i][j] = 17170445;
+                              gridViewTags[i][j] = "w_pawn";
+                              break;
+                    default:
+                        gridViewIds[i][j] = 17170445;
+                        gridViewTags[i][j] = "empty";
                         break;
                 }
             }
@@ -136,8 +173,14 @@ public class Grid {
 
     public int[][] getGridViewIdsArr(){
 
-        updateVieIds();
+        updateViewIdAndTag();
         return gridViewIds;
+    }
+
+    public String[][] getGridViewTagsArr(){
+
+        updateViewIdAndTag();
+        return gridViewTags;
     }
 
 
@@ -192,5 +235,6 @@ public class Grid {
 
         gridPieces[second_row][second_col] = gridPieces[first_row][first_col];
         gridPieces[first_row][first_col] = '#';
+
     }
 }

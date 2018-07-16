@@ -68,7 +68,7 @@ public class PositionEvaluation {
 
         for(int i = 0; i < count.length; i++){
 
-            Log.d(String.valueOf(piece[i]), String.valueOf(count[i]));
+           // Log.d(String.valueOf(piece[i]), String.valueOf(count[i]));
         }
 
     }
